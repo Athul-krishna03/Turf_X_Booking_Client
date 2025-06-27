@@ -41,8 +41,14 @@ export function NewsSidebar({ className = "" }: NewsSidebarProps) {
         setIsLoading(true);
         setError(null);
 
-        const response = await axios("/api/news?query=football");
-        console.log("news",response.data)
+        const response = await axios.get("https://newsapi.org/v2/everything", {
+            params: {
+            q: "football",
+            sortBy: "publishedAt",
+            language: "en",
+            apiKey: "048bfaae222c42c2aafd76aed8682b0e",
+            },
+        });
 
         const articles = response.data.articles;
 
