@@ -173,8 +173,7 @@ export const getChatRooms = async (userId: string) => {
   const response = await axiosInstance.get(
     `/_us/user/getChatRooms?userId=${userId}`
   );
-  console.log("getChatRooms", response);
-  return response.data.data;
+  return [response.data.data,response.data.newsData]
 };
 
 export const createChatRoom = async (data: object) => {
