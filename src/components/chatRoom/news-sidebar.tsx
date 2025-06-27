@@ -48,6 +48,9 @@ export function NewsSidebar({ className = "" }: NewsSidebarProps) {
             language: "en",
             apiKey: "048bfaae222c42c2aafd76aed8682b0e",
             },
+            headers: {
+                'User-Agent': 'Mozilla/5.0',
+            }
         });
 
         const articles = response.data.articles;
