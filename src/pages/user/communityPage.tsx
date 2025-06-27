@@ -12,7 +12,9 @@ import { uploadProfileImageCloudinary } from "../../utils/cloudinaryImageUpload"
 import { ChatRoom, Message, User } from "../../types/ChatRoomCommunityTypes";
 import { NewsSidebar } from "../../components/chatRoom/news-sidebar";
 
-const socket = io("http://localhost:5000", { autoConnect: false });
+const backendUrl = import.meta.env.VITE_BACKEND_API
+
+const socket = io(backendUrl, { autoConnect: false });
 
 export default function CommunityPage() {
   const CURRENT_USER_ID = useSelector((state: any) => state.user.user.id);

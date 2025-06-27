@@ -1,10 +1,9 @@
 import { axiosInstance } from "../../api/private.axios";
-import { turfAxiosInstance } from "../../api/turf.axios";
 import { TurfBookingResponse } from "../../components/turf/bookingManagement";
 import { ChangePasswordData } from "../../hooks/user/userDashboard";
 
 export const logoutTurf = async () => {
-  const response = await turfAxiosInstance.post("/_ts/turf/logout");
+  const response = await axiosInstance.post("/_ts/turf/logout");
   return response.data;
 };
 export const generateSlots = async (
@@ -15,7 +14,7 @@ export const generateSlots = async (
   slotDuration: number,
   price: number
 ) => {
-  const response = await turfAxiosInstance.post("/_ts/turf/generateSlots", {
+  const response = await axiosInstance.post("/_ts/turf/generateSlots", {
     turfId,
     date,
     startTime,

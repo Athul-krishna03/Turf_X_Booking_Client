@@ -111,3 +111,14 @@ export const getAdminDashBoardData = async () => {
     throw new Error("Failed to fetch admin dashboard data");
   }
 };
+
+export const getRevenueData = async () => {
+  try {
+    const response = await axiosInstance.get("/_ad/admin/getRevenueData")
+    console.log("revenue datta",response)
+    return response.data.revenueData
+  } catch (error) {
+    console.error("Failed to fetch revenue data", error);
+    throw new Error("Failed to fetch revenue data");
+  }
+}

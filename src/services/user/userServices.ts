@@ -1,3 +1,4 @@
+import { string } from "yup";
 import { axiosInstance } from "../../api/private.axios";
 import { ChangePasswordData } from "../../hooks/user/userDashboard";
 
@@ -45,12 +46,12 @@ export const slots = async (turfId: string, date: string) => {
   return response.data;
 };
 
-export const paymentService = async (slotId: string, price: number) => {
+export const paymentService = async (slotId: string, price: number,durarion:number) => {
   console.log("payment service");
 
   const response = await axiosInstance.post(
     "/_us/user/payments/create-payment-intent",
-    { slotId, price }
+    { slotId, price ,durarion }
   );
   console.log("payment api response", response);
   return response;
@@ -69,6 +70,7 @@ export const slotUpdate = async (
   date: string,
   slotId: string,
   price: number,
+  game:string,
   duration: number,
   paymentIntentId: string,
   slotLockId: string,
@@ -85,6 +87,7 @@ export const slotUpdate = async (
     paymentIntentId,
     paymentType,
     playerCount,
+    game
   });
   return response;
 };

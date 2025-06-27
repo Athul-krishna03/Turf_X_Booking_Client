@@ -10,6 +10,7 @@ export interface BookingCardProps {
   booking: {
     id?: string
     turfId: string
+    bookingId?:string
     turfName: string
     turfImage: string[]
     location: {
@@ -91,6 +92,7 @@ export default function BookingCard({ booking, onCancel, showActions, type }: Bo
             <div className="flex items-start justify-between mb-2">
               <div className="flex-1 min-w-0">
                 <h3 className="text-lg font-semibold text-white truncate">{booking.turfName}</h3>
+                <h4 className="text-lg font-semibold text-white truncate">{booking.bookingId}</h4>
                 <div className="flex items-center text-sm text-gray-400 mt-0.5">
                   <MapPin size={12} className="mr-1 flex-shrink-0" />
                   <span className="truncate">{booking.location?.city}, {booking.location?.state}</span>
