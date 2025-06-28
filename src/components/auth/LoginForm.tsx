@@ -11,9 +11,10 @@ export interface FormikLoginFormProps {
   onSubmit: (values: FormValues) => void;
   onGoogleLogin?: (credentialResponse:CredentialResponse) => void;
   userType?: "user" | "admin" | "turf";
+  onForgotPassword?:()=>void
 }
 
-const FormikLoginForm: React.FC<FormikLoginFormProps> = ({ onSubmit, onGoogleLogin, userType = "user"}) => {
+const FormikLoginForm: React.FC<FormikLoginFormProps> = ({ onSubmit, onGoogleLogin, userType = "user",onForgotPassword}) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const initialValues: FormValues = {
@@ -82,7 +83,7 @@ const FormikLoginForm: React.FC<FormikLoginFormProps> = ({ onSubmit, onGoogleLog
                   Password
                 </label>
                 <a 
-                  href="/forgot-password" 
+                  onClick={onForgotPassword} 
                   className="text-sm text-[#3BE188] hover:underline"
                 >
                   Forgot password?
