@@ -1,9 +1,10 @@
 import { axiosInstance } from "../../api/private.axios";
 import { TurfBookingResponse } from "../../components/turf/bookingManagement";
+import { TURF_ROUTES } from "../../constants/turf_routes";
 import { ChangePasswordData } from "../../hooks/user/userDashboard";
 
 export const logoutTurf = async () => {
-  const response = await axiosInstance.post("/_ts/turf/logout");
+  const response = await axiosInstance.post(TURF_ROUTES.LOGOUT_TURF);
   return response.data;
 };
 export const generateSlots = async (
@@ -14,7 +15,7 @@ export const generateSlots = async (
   slotDuration: number,
   price: number
 ) => {
-  const response = await axiosInstance.post("/_ts/turf/generateSlots", {
+  const response = await axiosInstance.post(TURF_ROUTES.GENERATE_SLOTS, {
     turfId,
     date,
     startTime,
@@ -34,7 +35,7 @@ export const generateSlotsDateRange = async (
   slotDuration: number,
   price: number
 ) => {
-  const response = await axiosInstance.post("/_ts/turf/generateSlots", {
+  const response = await axiosInstance.post(TURF_ROUTES.GENERATE_SLOTS_DATE_RANGE, {
     turfId,
     selectedDate,
     endDate,
@@ -47,27 +48,25 @@ export const generateSlotsDateRange = async (
 };
 
 export const changeTurfPassword = async (data: ChangePasswordData) => {
-  const response = await axiosInstance.patch("/_ts/turf/change-password", data);
+  const response = await axiosInstance.patch(TURF_ROUTES.CHANGE_TURF_PASSWORD, data);
   console.log("changeturfPassword response", response);
   return response.data;
 };
 
 export const fetchSlots = async (turfId: string, date: string) => {
   const response = await axiosInstance.get(
-    `/_ts/turf/slots?turfId=${turfId}&date=${date}`
+    TURF_ROUTES.FETCH_SLOTS(turfId, date)
   );
   return response.data;
 };
 
 export const updateSlotStatus = async (id: string) => {
-  const response = await axiosInstance.patch(`/_ts/turf/updateSlot?id=${id}`);
+  const response = await axiosInstance.patch(TURF_ROUTES.UPDATE_SLOT_STATUS(id));
   return response;
 };
 
 export const getTurfBookings = async (): Promise<TurfBookingResponse> => {
-  const response = await axiosInstance.get(`/_ts/turf/getBookingDetials`);
-  console.log("respomse of the bppl", response);
-
+  const response = await axiosInstance.get(TURF_ROUTES.GET_TURF_BOOKINGS);
   return response.data.data;
 };
 
@@ -75,7 +74,7 @@ export const cancelTurfBooking = async (
   bookingId: string,
   bookingType: string
 ) => {
-  const response = await axiosInstance.patch(`/_ts/turf/cancelBooking`, {
+  const response = await axiosInstance.patch(TURF_ROUTES.CANCEL_TURF_BOOKING, {
     bookingId,
     bookingType,
   });
@@ -83,7 +82,7 @@ export const cancelTurfBooking = async (
 };
 
 export const getTurfDashBoardData = async () => {
-  const response = await axiosInstance.get(`/_ts/turf/getTurfDashBoardData`);
+  const response = await axiosInstance.get(TURF_ROUTES.GET_TURF_DASHBOARD_DATA);
   console.log("dashBoard", response);
   return response.data.dashBoardData;
 };

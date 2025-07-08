@@ -1,21 +1,47 @@
 import { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
-import { TurfBookingResponse } from "../turf/bookingManagement";
-import { CalendarCheck2, Users2 } from "lucide-react";
+import {
+  Calendar,
+  CalendarCheck2,
+  TrendingUp,
+  Users,
+  Users2,
+  Wallet,
+} from "lucide-react";
 import { CardLoadingSkeleton } from "../ui/loading/loading-skeletons";
 import NormalBookingCard from "../turf/normalBookingCard";
 import { Pagination1 } from "./Pagination";
-import HostedgameCard from "../turf/hostedGame"
+import HostedgameCard from "../turf/hostedGame";
 import { getRevenueData } from "../../services/admin/adminService";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { Booking, SharedBooking } from "../../types/Type";
 
+export type RevenueResponse = {
+  normal: Booking[];
+  hosted: SharedBooking[];
+  revenueStats: {
+    totalBookings: number;
+    totalEarnings: number;
+    revenue: number;
+    normalBooking: number;
+    sharedBooking: number;
+  };
+};
 
 const RevenueManagement = () => {
   const [tab, setTab] = useState("normal");
   const [normalBookingPage, setNormalBookingPage] = useState(1);
   const [hostedBookingPage, setHostedBookingPage] = useState(1);
-  const [bookingData, setBookingData] = useState<TurfBookingResponse>({
+  const [bookingData, setBookingData] = useState<RevenueResponse>({
     normal: [],
     hosted: [],
+    revenueStats: {
+      totalBookings: 0,
+      totalEarnings: 0,
+      revenue: 0,
+      normalBooking: 0,
+      sharedBooking: 0,
+    },
   });
   const [isLoading, setIsLoading] = useState(true);
   const ITEMS_PER_PAGE = 3;
@@ -49,6 +75,97 @@ const RevenueManagement = () => {
   return (
     <div className="flex h-screen bg-gray-50">
       <div className="ml-4 flex-1  overflow-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <Card className="relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-20 h-20 bg-blue-500 rounded-bl-full opacity-10"></div>
+            <CardHeader className="pb-2">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-sm font-medium text-gray-600">
+                  {"Total Platform Revenue"}
+                </CardTitle>
+                <Calendar className="h-5 w-5 text-blue-500" />
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="text-3xl font-bold text-gray-900 mb-1">
+                ₹
+                {Math.ceil(
+                  bookingData.revenueStats.totalEarnings || 0
+                ).toLocaleString()}
+              </div>
+              <p className="text-sm text-green-600 flex items-center">
+                <TrendingUp className="h-4 w-4 mr-1" />
+                +12% from last month
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-20 h-20 bg-green-500 rounded-bl-full opacity-10"></div>
+            <CardHeader className="pb-2">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-sm font-medium text-gray-600">
+                  {"Profit Revenue"}
+                </CardTitle>
+                <Wallet className="h-5 w-5 text-green-500" />
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="text-3xl font-bold text-gray-900 mb-1">
+                ₹
+                {Math.ceil(
+                  bookingData.revenueStats.revenue || 0
+                ).toLocaleString()}
+              </div>
+              <p className="text-sm text-green-600 flex items-center">
+                <TrendingUp className="h-4 w-4 mr-1" />
+                +8% from last month
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-20 h-20 bg-purple-500 rounded-bl-full opacity-10"></div>
+            <CardHeader className="pb-2">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-sm font-medium text-gray-600">
+                  {"Normal Bookings"}
+                </CardTitle>
+                <Users className="h-5 w-5 text-purple-500" />
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="text-3xl font-bold text-gray-900 mb-1">
+                {bookingData.revenueStats.normalBooking || 0}
+              </div>
+              <p className="text-sm text-green-600 flex items-center">
+                <TrendingUp className="h-4 w-4 mr-1" />
+                +6% from last month
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-20 h-20 bg-orange-500 rounded-bl-full opacity-10"></div>
+            <CardHeader className="pb-2">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-sm font-medium text-gray-600">
+                  {"Shared Bookings"}
+                </CardTitle>
+                <Users className="h-5 w-5 text-orange-500" />
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="text-3xl font-bold text-gray-900 mb-1">
+                {bookingData.revenueStats.sharedBooking || 0}
+              </div>
+              <p className="text-sm text-green-600 flex items-center">
+                <TrendingUp className="h-4 w-4 mr-1" />
+                +24% from last month
+              </p>
+            </CardContent>
+          </Card>
+        </div>
 
         <Tabs value={tab} onValueChange={setTab}>
           <TabsList className="bg-white border border-gray-200 mb-6">
@@ -78,7 +195,7 @@ const RevenueManagement = () => {
                   <NormalBookingCard
                     key={booking.id}
                     booking={booking}
-                    onCancel={()=>{}}
+                    onCancel={() => {}}
                     userType="admin"
                   />
                 ))}
@@ -113,9 +230,8 @@ const RevenueManagement = () => {
                   <HostedgameCard
                     key={game.id}
                     game={game}
-                    onCancel={()=>{}}
+                    onCancel={() => {}}
                     userType="admin"
-                    
                   />
                 ))}
                 <Pagination1
