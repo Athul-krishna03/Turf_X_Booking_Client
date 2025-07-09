@@ -3,3 +3,9 @@ export enum  BASE_URL{
     TURF=`/_ts/turf`,
     ADMIN=`/_ad/admin`
 }
+
+export enum URL_PART{
+    user="_us",
+    turf="_ts",
+    admin="_ad"
+}

@@ -26,4 +26,5 @@ export const USER_ROUTES = {
     UPDATE_NOTIFICATION: `${BASE_URL.USER}/notification`,
     GET_REVIEWS: (turfId: string) =>`${BASE_URL.USER}/getReview?turfId=${turfId}`,
     ADD_REVIEW: `${BASE_URL.USER}/review`,
+    REFRESH_TOKEN: `${BASE_URL.USER}/refresh-token`,
 };

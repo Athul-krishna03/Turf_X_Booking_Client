@@ -11,4 +11,5 @@ export const ADMIN_ROUTES = {
     UPDATE_REQUEST_STATUS: (turfId: string) =>`${BASE_URL.ADMIN}/request-status/${turfId}`,
     GET_ADMIN_DASHBOARD_DATA: `${BASE_URL.ADMIN}/get-Dashboard`,
     GET_REVENUE_DATA: `${BASE_URL.ADMIN}/getRevenueData`,
+    REFRESH_TOKEN:`${BASE_URL.ADMIN}/refresh-token`,
 };

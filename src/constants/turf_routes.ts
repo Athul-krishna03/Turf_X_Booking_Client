@@ -10,4 +10,6 @@ export const TURF_ROUTES = {
     GET_TURF_BOOKINGS: `${BASE_URL.TURF}/getBookingDetials`,
     CANCEL_TURF_BOOKING: `${BASE_URL.TURF}/cancelBooking`,
     GET_TURF_DASHBOARD_DATA: `${BASE_URL.TURF}/getTurfDashBoardData`,
+    REFRESH_TOKEN: `${BASE_URL.TURF}/refresh-token`,
+
 };
