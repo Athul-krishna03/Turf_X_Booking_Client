@@ -1,4 +1,4 @@
-import { String } from "lodash";
+
 import { BookingType } from "./Booking";
 
 
