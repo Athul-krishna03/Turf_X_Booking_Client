@@ -7,11 +7,11 @@ export interface BookingType {
         city: string;
         state: string;
     };
-    currency: string;      // e.g., "₹"
-    date: string;          // ISO string: "2025-05-23T18:30:00.000Z"
-    duration: number;      // in hours
-    startTime: string;     // e.g., "17:00"
+    currency: string;      
+    date: string;          
+    duration: number;      
+    startTime: string;    
     status: "Pending" | "Booked" | "Cancelled" | "Confirmed";
-    price: number;         // total price
+    price: number;         
     sport: string;
 }

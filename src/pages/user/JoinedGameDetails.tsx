@@ -87,6 +87,9 @@ const JoinedGameDetails = () => {
       lng: turf?.location?.coordinates.coordinates[0] ?? 0
     }
 
+    console.log("joiningGameData",joinedGameData);
+    
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
